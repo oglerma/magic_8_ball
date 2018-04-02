@@ -10,16 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var ballPicture: UIImageView!
+    let ballPictureArray = ["ball1","ball2","ball3","ball4","ball5"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func getRandomNumber() -> Int {
+        return Int(arc4random_uniform(5))
+    }
+    
+    func getRandomImage(){
+        ballPicture.image = UIImage(named: ballPictureArray[getRandomNumber()])
     }
 
-
+    
+    @IBAction func getAnswerBtn(_ sender: Any) {
+        getRandomImage()
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        getRandomImage()    
+    }
 }
 
